@@ -3,9 +3,7 @@ import React from 'react'
 function Home() {
   return (
     <div>
-      <h1 className="text-3xl font-bold underline">
-      Hello world!
-        </h1>
+      <img src = "https://kidscodecs.com/wp-content/uploads/2020/02/History_TS_ProgrammingMemes_image4.png" className='m-auto'></img>
     </div>
   )
 }
