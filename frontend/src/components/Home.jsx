@@ -1,11 +1,11 @@
 import React from 'react'
-
+import {NavLink , Link} from 'react-router-dom';
+import Navbar from './Navbar';
 function Home() {
   return (
     <div>
-      <h1 className="text-3xl font-bold underline">
-      Hello world!
-        </h1>
+      <Navbar></Navbar>
+      
     </div>
   )
 }
