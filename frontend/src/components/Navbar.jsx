@@ -1,9 +1,10 @@
 import React from 'react'
 import connectEmLogo from '../assets/connectem-logo.svg';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 function Navbar() {
   return (
     <div>
+      <Outlet/>
       <nav className="bg-blue-600 text-white flex items-center justify-between px-6 py-4">
       {/* Logo Section */}
       <div className="flex items-center">
@@ -24,9 +25,11 @@ function Navbar() {
           Login
         </button>
         </Link>
+        <Link to="/login">
         <button className="bg-white text-blue-600 px-4 py-2 rounded hover:bg-blue-700 hover:text-white transition">
           Signup
         </button>
+        </Link>
       </div>
     </nav>
     </div>

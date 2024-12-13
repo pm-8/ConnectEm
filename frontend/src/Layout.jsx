@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import Navbar from './components/Navbar';
 import Home from './components/Home'
 function Layout() {
-    const [Login , setLogin] = useState(true);
+    const [Login , setLogin] = useState(false);
   return (
     <div>
         

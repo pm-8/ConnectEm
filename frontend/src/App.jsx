@@ -4,14 +4,13 @@ import './App.css'
 import Home from './components/Home'
 import Navbar from './components/Navbar'
 import Signup from './components/Signup'
-import LoginPage from './components/LoginPage'
 
 
 function App() {
   const router = createBrowserRouter([
     {
       path:"/login",
-      element:<><Navbar/><LoginPage/></>
+      element:<><Navbar/><Signup/></>
     },
     {
       path:"/",
@@ -21,7 +20,7 @@ function App() {
 
   return (
     <>
-
+      <RouterProvider router={router}></RouterProvider>
     </>
   )
 }
