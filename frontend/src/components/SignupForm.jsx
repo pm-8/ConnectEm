@@ -1,22 +1,23 @@
 import React from "react";
 import { useState } from "react";
 const SignupForm = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [username, setFirstName] = useState('');
+  const [fullname, setLastName] = useState('');
   const [gender,setGender] = useState('Male');
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
   const [role, setRole] = useState('');
   async function register(ev){
+    ev.preventDefault();// prevents default form submissions
     try{
       await fetch('http://localhost:3000/register',{
         method : "POST",
-        body : JSON.stringify({firstName,lastName,gender,email,password,role}),
+        body : JSON.stringify({username,fullname,gender,email,password,role}),
         headers : {'Content-Type':'application/json'}        
       })
     }
     catch(err){
-      alert('Regsitration Failed. Coder Chutiya hai')
+      console.log('Regsitration Failed. Coder Chutiya hai')
     }
   }
   return (
@@ -27,15 +28,15 @@ const SignupForm = () => {
             htmlFor="firstName"
             className="block text-sm font-medium text-darkBlue"
           >
-            First Name
+            Username
           </label>
           <input
             type="text"
             id="firstName"
-            value = {firstName}
+            value = {username}
             onChange={ev => setFirstName(ev.target.value)}
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-            placeholder="First Name"
+            placeholder="Username"
           />
         </div>
         <div className="flex-1">
@@ -43,15 +44,15 @@ const SignupForm = () => {
             htmlFor="lastName"
             className="block text-sm font-medium text-darkBlue"
           >
-            Last Name
+            Full Name
           </label>
           <input
             type="text"
             id="lastName"
-            value = {lastName}
+            value = {fullname}
             onChange = {ev => setLastName(ev.target.value)}
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-            placeholder="Last Name"
+            placeholder="Full Name"
           />
         </div>
       </div>
