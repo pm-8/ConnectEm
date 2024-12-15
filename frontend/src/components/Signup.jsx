@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-const Signup = () => {
-  const [isLogin, setIsLogin] = useState(true);
-
+const Signup = ({state}) => {
+  const [isLogin, setIsLogin] = useState(state);
+  
   return (
     <div className="flex flex-col items-center justify-center h-[90vh] bg-gradient-to-b from-blue-50 to-blue-200 text-darkBlue">
       <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg">

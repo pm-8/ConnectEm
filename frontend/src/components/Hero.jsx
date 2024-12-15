@@ -1,10 +1,19 @@
-import React from 'react'
-
+import React, { useState } from 'react'
+import { Outlet } from 'react-router-dom';
+import Home from './Home';
 function Hero() {
+  const [isLogin , setLogin] = useState(false);
   return (
-    <div>
-      
-    </div>
+    <>
+      {isLogin 
+      ? <>
+          <Outlet/>
+        </> 
+        : 
+        <>
+          <Home/>
+        </>}
+    </>
   )
 }
 

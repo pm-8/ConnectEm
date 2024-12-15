@@ -1,12 +1,15 @@
 import React from 'react'
 import {NavLink , Link} from 'react-router-dom';
-import Navbar from './Navbar';
+
+import CourseCard from './Courses/CourseCard';
 function Home() {
   return (
-    <div>
-      {/* <Navbar></Navbar> */}
-      <img src = "https://kidscodecs.com/wp-content/uploads/2020/02/History_TS_ProgrammingMemes_image4.png" className='m-auto'></img>
-    </div>
+    <>
+      <div className='w-screen h-screen flex justify-center items-center flex-col'>
+          <div className=' text-[100px]'> Home Page</div>
+          <CourseCard/>
+      </div>
+    </>
   )
 }
 
