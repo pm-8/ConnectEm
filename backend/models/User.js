@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema(
     {
-      firstName: {
+      username: {
         type: String,
         required: true,
       },
-      lastName: {
+      fullName: {
         type: String,
       },
       email: {
@@ -14,11 +14,16 @@ const userSchema = mongoose.Schema(
         required: true,
         unique: true,
       },
+      password: {
+        type: String,
+        required : true,
+        unique: false,
+      },
       Role: {
-        type: Enumerator('Mentor' , 'Mentee'),
+        type: String
       },
       gender: {
-        type: Enumerator('Male','Female',"Other"),
+        type: String
       },
     },
     { timestamps: true }
