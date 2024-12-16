@@ -6,7 +6,7 @@ const Login = () => {
   async function login(ev){
       ev.preventDefault();
       try{
-        await fetch('http://localhost:3000/login',{
+        await fetch('http://localhost:3000/auth/login',{
           method: "POST",
           body : JSON.stringify({username,password}),
           headers:{"Content-Type":"application/json"}
