@@ -3,6 +3,7 @@ const router = express.Router();
 const authMiddleware = require("../middleware/authMiddleware");
 const User = require("../models/User");
 router.use(authMiddleware);
+router.use(require('cookie-parser'));
 router.get("/profile",async()=>{
     try{
         const userId = req.user.id;

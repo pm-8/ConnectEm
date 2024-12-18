@@ -11,7 +11,9 @@ mongoose.connect(process.env.DB_URL)
     .then(() => console.log('Connected to MongoDB Atlas'))
     .catch(err => console.error('MongoDB connection error:', err));
 
-router.use(cors());
+router.use(cors({
+    credentials: true, // Allow cookies
+}));
 router.use(express.json());
 
 router.post('/register', async (req, res) => {

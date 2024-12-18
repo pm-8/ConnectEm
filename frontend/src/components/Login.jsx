@@ -11,11 +11,12 @@ const Login = () => {
         await fetch('http://localhost:3000/auth/login',{
           method: "POST",
           body : JSON.stringify({username,password}),
-          headers:{"Content-Type":"application/json"}
+          headers:{"Content-Type":"application/json"},
+          credentials:true
         })
-        navigate("/");
+        navigate("/profile");
       }
-      catch(e){
+      catch(err){
         console.err("Submission failed");
       }
   }

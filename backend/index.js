@@ -6,7 +6,10 @@ const authRoutes = require('./routes/auth')
 const profileRoutes = require('./routes/profile')
 const protectedRoutes = require('./routes/protectedRoutes')
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:3000",
+    credentials:true,
+}));
 app.use("/auth",authRoutes);
 app.use("/protected",protectedRoutes);
 app.use("/profile",profileRoutes);
