@@ -1,8 +1,10 @@
 import React from "react";
 import { useState } from "react";
+import {useNavigate} from "react-router-dom";
 const Login = () => {
   const [username,setUsername] = useState('');
   const [password,setPassword] = useState('');
+  const navigate = useNavigate();
   async function login(ev){
       ev.preventDefault();
       try{
@@ -11,6 +13,7 @@ const Login = () => {
           body : JSON.stringify({username,password}),
           headers:{"Content-Type":"application/json"}
         })
+        navigate("/");
       }
       catch(e){
         console.err("Submission failed");

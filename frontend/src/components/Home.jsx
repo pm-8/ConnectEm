@@ -1,7 +1,10 @@
 import React from 'react'
 import {NavLink , Link} from 'react-router-dom';
 import Navbar from './Navbar';
+import { useEffect } from 'react';
+import useHello from '../hooks/useHello';
 function Home() {
+    
   return (
     <div>
       {/* <Navbar></Navbar> */}
