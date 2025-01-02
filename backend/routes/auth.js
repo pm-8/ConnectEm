@@ -39,7 +39,7 @@ router.post('/register', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
-    console.log(req.body);
+    console.table(req.body);
     try {
         const userDoc = await User.findOne({ username });
         if (!userDoc) {
@@ -49,7 +49,12 @@ router.post('/login', async (req, res) => {
         if (passOk) {
             console.log("User logged in");
             const token = jwt.sign({ username, id: userDoc._id }, process.env.SECRET_KEY, { expiresIn: '1h' });
-            res.cookie('token', token, { httpOnly: true }).json({ message: 'Login Successful', token });
+            res.cookie('token', token, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'strict'
+            }).json({ message: 'Login Successful', token });
+            
         } else {
             console.log("Wrong Password");
             res.status(404).json({ error: "Wrong Credentials" });

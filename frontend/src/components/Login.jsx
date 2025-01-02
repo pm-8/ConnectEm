@@ -5,21 +5,26 @@ const Login = () => {
   const [username,setUsername] = useState('');
   const [password,setPassword] = useState('');
   const navigate = useNavigate();
-  async function login(ev){
-      ev.preventDefault();
-      try{
-        await fetch('http://localhost:3000/auth/login',{
-          method: "POST",
-          body : JSON.stringify({username,password}),
-          headers:{"Content-Type":"application/json"},
-          credentials:true
-        })
-        navigate("/profile");
-      }
-      catch(err){
-        console.err("Submission failed");
-      }
-  }
+  async function login(ev) {
+    ev.preventDefault();
+    try {
+        const response = await fetch('http://localhost:3000/auth/login', {
+            method: "POST",
+            body: JSON.stringify({ username, password }),
+            headers: { "Content-Type": "application/json" },
+            credentials: "include"
+        });
+        if (response.ok) {
+            navigate("/profile");
+        } else {
+            const errorData = await response.json();
+            alert(errorData.error || "Login failed");
+        }
+    } catch (err) {
+        console.log("Submission failed", err);
+    }
+}
+
   return (
     <form className="space-y-6" onSubmit={login}>
       <div>
