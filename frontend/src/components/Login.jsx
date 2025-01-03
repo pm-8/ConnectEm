@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import {useNavigate} from "react-router-dom";
+import { ToastContainer,toast } from "react-toastify";
 const Login = () => {
   const [username,setUsername] = useState('');
   const [password,setPassword] = useState('');
@@ -14,11 +15,22 @@ const Login = () => {
             headers: { "Content-Type": "application/json" },
             credentials: "include"
         });
+        const data = await response.json();
+        localStorage.setItem("Username",data.username);
+        localStorage.setItem("Gender",data.gender);
+        localStorage.setItem("fullName",data.fullName)
+        localStorage.setItem("Role",data.role);
+        localStorage.setItem("isLoggedIn",true);
         if (response.ok) {
-            navigate("/profile");
+            toast("User Logged-In")
+            setTimeout(()=>{
+              navigate("/profile")
+            },0.5);
+            // alert("cool")
         } else {
             const errorData = await response.json();
-            alert(errorData.error || "Login failed");
+            handleError("Login Failed")
+            // alert(errorData.error || "Login failed");
         }
     } catch (err) {
         console.log("Submission failed", err);

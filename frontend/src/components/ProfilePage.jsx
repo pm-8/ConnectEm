@@ -1,18 +1,21 @@
 import React from "react";
 import useAuth from "../hooks/useAuth";
-
+import { useState } from "react";
+import { isCookie } from "react-router-dom";
 const ProfilePage = () => {
-    const { user, loading, error } = useAuth();
-    console.log(user);
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div style={{ color: "red" }}>{error}</div>;
+    const[username,setUsername] = useState(localStorage.getItem("Username"));
+    const[fullName,setfullName] = useState(localStorage.getItem("fullName"));
+    const[gender,setGender] = useState(localStorage.getItem("Gender"));
+    const[Role,setRole] = useState(localStorage.getItem("Role"));
+    // console.log(user);
 
     return (
         <div>
             <h2>👤 Profile</h2>
-            <p><strong>Username:</strong> {user.username}</p>
-            <p><strong>Email:</strong> {user.email}</p>
-            <p><strong>Full Name:</strong> {user.fullName || "N/A"}</p>
+            <p><strong>Username:</strong> {username}</p>
+            <p><strong>Full Name:</strong> {fullName}</p>
+            <p><strong>Gender:</strong> {gender}</p>
+            <p><strong>Role:</strong> {Role}</p>
         </div>
     );
 };

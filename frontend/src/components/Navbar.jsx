@@ -1,7 +1,10 @@
 import React from 'react'
 import connectEmLogo from '../assets/connectem-logo.svg';
 import { Link, Outlet } from 'react-router-dom';
+import { useState } from 'react';
 function Navbar() {
+  const [isLoggedIn,setLogin] = useState(false); 
+  const [username,setUsername] = useState("");
   return (
     <div>
       <Outlet/>
@@ -20,12 +23,13 @@ function Navbar() {
       </div>
 
       {/* Buttons Section */}
+
       <div className="flex space-x-4">
         <Link to = "/login"><button className="border-2 border-white text-white px-4 py-2 rounded hover:bg-white hover:text-blue-600 transition">
           Login
         </button>
         </Link>
-        <Link to="/login">
+        <Link to="/signup">
         <button className="bg-white text-blue-600 px-4 py-2 rounded hover:bg-blue-700 hover:text-white transition">
           Signup
         </button>
