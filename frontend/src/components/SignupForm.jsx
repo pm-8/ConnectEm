@@ -10,7 +10,7 @@ const SignupForm = () => {
   async function register(ev){
     ev.preventDefault();// prevents default form submissions
     try{
-      await fetch('http://localhost:3000/register',{
+      await fetch('http://localhost:3000/auth/register',{
         method : "POST",
         body : JSON.stringify({username,fullname,gender,email,password,role}),
         headers : {'Content-Type':'application/json'}        

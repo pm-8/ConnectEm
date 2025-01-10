@@ -1,18 +1,22 @@
 import React from "react";
 import { useState } from "react";
+import {useNavigate} from "react-router-dom";
 const Login = () => {
   const [username,setUsername] = useState('');
   const [password,setPassword] = useState('');
+  const navigate = useNavigate();
   async function login(ev){
       ev.preventDefault();
       try{
-        await fetch('http://localhost:3000/login',{
+        await fetch('http://localhost:3000/auth/login',{
           method: "POST",
           body : JSON.stringify({username,password}),
-          headers:{"Content-Type":"application/json"}
+          headers:{"Content-Type":"application/json"},
+          credentials:true
         })
+        navigate("/profile");
       }
-      catch(e){
+      catch(err){
         console.err("Submission failed");
       }
   }

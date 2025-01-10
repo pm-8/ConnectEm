@@ -1,8 +1,6 @@
 import React from 'react'
-import {NavLink , Link} from 'react-router-dom';
-
-import CourseCard from './Courses/CourseCard';
 function Home() {
+    
   return (
     <>
       <div className='w-screen h-screen flex justify-center items-center flex-col'>

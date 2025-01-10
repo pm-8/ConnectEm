@@ -2,6 +2,7 @@ import { useState } from 'react';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import './App.css'
 import Home from './components/Home'
+import ProfilePage from './components/ProfilePage';
 import Navbar from './components/Navbar'
 import Signup from './components/Signup'
 import Hero  from './components/Hero';
@@ -18,7 +19,11 @@ function App() {
     },
     {
       path:"/",
-      element:<><Navbar/><Hero/></>
+      element:<><Navbar/><Home/></>
+    },
+    {
+      path:"/profile",
+      element:<><Navbar/><ProfilePage/></>
     }
   ]);
 
