@@ -1,5 +1,8 @@
 import React from "react";
 import { useState } from "react";
+import { ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 const SignupForm = () => {
   const [username, setFirstName] = useState('');
   const [fullname, setLastName] = useState('');
@@ -7,14 +10,20 @@ const SignupForm = () => {
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
   const [role, setRole] = useState('');
+  const navigate = useNavigate();
   async function register(ev){
     ev.preventDefault();// prevents default form submissions
     try{
-      await fetch('http://localhost:3000/auth/register',{
+      const response = await fetch('http://localhost:3000/auth/register',{
         method : "POST",
         body : JSON.stringify({username,fullname,gender,email,password,role}),
         headers : {'Content-Type':'application/json'}        
       })
+      // localStorage.setItem("isRegistered",true);
+      const data = await response.json()
+      console.log(data);
+      if(response.ok)
+      navigate("/login");
     }
     catch(err){
       console.log('Regsitration Failed. Coder Chutiya hai')
@@ -127,6 +136,15 @@ const SignupForm = () => {
       >
         Signup
       </button>
+      <Link to="/login">
+      <button
+            className="text-sm text-blue-600 underline hover:text-blue-800"
+      >
+            Already Registered? Login
+
+      </button>
+      </Link>
+      
     </form>
   );
 };

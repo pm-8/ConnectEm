@@ -3,16 +3,27 @@ const cors = require("cors");
 const app = express();
 require('dotenv').config();
 const authRoutes = require('./routes/auth')
-const profileRoutes = require('./routes/profile')
 const protectedRoutes = require('./routes/protectedRoutes')
+const cookieParser = require("cookie-parser");
+const authMiddleware = require('./middleware/authMiddleware');
+app.use(cookieParser());
 app.use(express.json());
+const allowedOrigins = ["http://localhost:5173", "http://localhost:3000"];
+
 app.use(cors({
-    origin: "http://localhost:3000",
-    credentials:true,
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+    credentials: true,
 }));
+
+
 app.use("/auth",authRoutes);
 app.use("/protected",protectedRoutes);
-app.use("/profile",profileRoutes);
 app.listen(process.env.PORT, () => {
     console.log(`http://localhost:${process.env.PORT}`);
     }

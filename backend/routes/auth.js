@@ -12,7 +12,8 @@ mongoose.connect(process.env.DB_URL)
     .catch(err => console.error('MongoDB connection error:', err));
 
 router.use(cors({
-    credentials: true, // Allow cookies
+    origin: "http://localhost:5173", // Allow your frontend origin
+    credentials: true, // Allow credentials (cookies)
 }));
 router.use(express.json());
 
@@ -39,7 +40,7 @@ router.post('/register', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
-    console.log(req.body);
+    console.table(req.body);
     try {
         const userDoc = await User.findOne({ username });
         if (!userDoc) {
@@ -48,16 +49,32 @@ router.post('/login', async (req, res) => {
         const passOk = await bcryptjs.compare(password, userDoc.password);
         if (passOk) {
             console.log("User logged in");
-            const token = jwt.sign({ username, id: userDoc._id }, process.env.SECRET_KEY, { expiresIn: '1h' });
-            res.cookie('token', token, { httpOnly: true }).json({ message: 'Login Successful', token });
+            const token = jwt.sign(
+                { username: userDoc.username, id: userDoc._id }, 
+                process.env.SECRET_KEY, 
+                { expiresIn: '1h' }
+            );
+            res.cookie('token', token, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'strict'
+            }).json({
+                message: 'Login Successful',
+                token,
+                username: userDoc.username,
+                gender: userDoc.gender,
+                fullName: userDoc.fullName,
+                role: userDoc.Role
+            });
         } else {
             console.log("Wrong Password");
             res.status(404).json({ error: "Wrong Credentials" });
         }
     } catch (e) {
-        console.error("Error during login", e); // Fixed typo
+        console.error("Error during login", e);
         res.status(500).json({ error: 'INTERNAL SERVER ERROR' });
     }
 });
+
 
 module.exports = router;
